@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # TODO: constraints: si l'utilisateur n'a pas de personnage
+  root to: redirect { Character.count > 0 ? '/characters/1' : '/characters/new' }
 
-  root 'pages#index'
+  resources :characters do
+    member do
+      post 'fight_opponent/:opponent_id', to: 'characters#fight_opponent', as: 'fight_opponent'
+    end
+  end
 end

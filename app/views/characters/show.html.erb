@@ -1,0 +1,37 @@
+<h2><%= @character.name %></h2>
+<p>Vie <strong><%= @character.lp %></strong></p>
+<p>Attaque <strong><%= @character.attack %></strong></p>
+
+<%= button_to 'Mettre fin à ses jours', @character, method: :delete, data: { confirm: 'Vraiment ?' }, class: 'btn btn-danger' %>
+
+<div id="edit-form" style="display: none;">
+  <%= form_for @character do |f| %>
+    <div class="form-group">
+      <%
+=begin%>
+ <%= f.label :name %> 
+<%
+=end%>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <%= f.submit 'Confirmer mon nouveau nom', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<button id="edit-button" class="btn btn-secondary">Changer de nom</button>
+
+<%= render "opponents", collection: @opponents, as: :opponents %>
+
+
+
+
+
+
+
+
+<script>
+  document.getElementById('edit-button').addEventListener('click', function() {
+    document.getElementById('edit-form').style.display = 'block';
+    this.style.display = 'none';
+  });
+</script>

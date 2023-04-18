@@ -1,0 +1,9 @@
+<% @opponents.each do |opponent| %>
+    <p><strong><%= opponent.name %></strong></p>
+    <p>Vie <strong><%= opponent.lp %></strong></p>
+    <p>Attaque <strong><%= opponent.attack %></strong></p>
+
+    <%= form_with url: fight_opponent_character_path(@character, opponent), method: :post do |form| %>
+        <%= form.submit "Défier", class: "btn btn-primary" %>
+    <% end %>
+<% end %>
