@@ -3,7 +3,9 @@
     <p>Vie <strong><%= opponent.lp %></strong></p>
     <p>Attaque <strong><%= opponent.attack %></strong></p>
 
-    <%= form_with url: fight_opponent_character_path(@character, opponent), method: :post do |form| %>
-        <%= form.submit "Défier", class: "btn btn-primary" %>
+    <%= form_for :fight, url: fights_path, method: :post do |f| %>
+        <%= f.hidden_field :character_id, value: @character.id %>
+        <%= f.hidden_field :opponent_id, value: opponent.id %>
+        <%= f.submit "Défier" %>
     <% end %>
 <% end %>

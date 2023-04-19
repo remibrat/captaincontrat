@@ -18,6 +18,8 @@ class CharactersController < ApplicationController
   end
 
   def show
+    @last_fight_results = session[:last_fight_results] if session[:last_fight_results]
+    session.delete(:last_fight_results)
     @character = Character.find(params[:id])
     @opponents = Character.where.not(id: @character.id)
     @opponents = @opponents.select do |opponent|
@@ -46,24 +48,9 @@ class CharactersController < ApplicationController
     render :new
   end
 
-  def fight_opponent
-    @character = Character.find(params[:id])
-    @opponent = Character.find(params[:opponent_id])
-    @winner = calculate_winner(@character, @opponent)
-    render json: { winner: @winner.name }
-  end
-
   private
 
   def character_params
     params.require(:character).permit(:name)
-  end
-
-  def calculate_winner(character, opponent)
-    if opponent.lp / character.attack.to_f <= character.lp / opponent.attack.to_f
-      character
-    else
-      opponent
-    end
   end
 end

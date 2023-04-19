@@ -1,0 +1,36 @@
+<div class="modal fade" id="result-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>
+                    <% if @last_fight_results['winner'] == @character %>
+                        Tu as gagné !
+                    <% else %>
+                        Perdu looser
+                    <% end %>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container"> 
+                        <div class="row"> 
+                            <div class="col-md-12"> 
+                                <div class="alert-message %>-message">
+                                    <p><strong>Coups portés : </strong><%= @last_fight_results['character_hits'] %></p>
+                                    <p><strong>Coups reçus : </strong><%= @last_fight_results['opponent_hits'] %></p>
+                                    <p><strong>Dégats infligés : </strong><%= @last_fight_results['character_damages_given'] %></p>
+                                    <p><strong>Dégats reçus : </strong><%= @last_fight_results['opponent_damages_given'] %></p>
+                                    <p><strong>Points de vie restants
+                                    <%= @last_fight_results['winner'] == @character ? '' : 'de l\'adversaire ' %>
+                                    : </strong><%= @last_fight_results['lp_left'] %></p>
+                                    <i class="icofont icofont-close"></i>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

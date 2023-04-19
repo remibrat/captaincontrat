@@ -22,6 +22,10 @@
 
 <%= render "opponents", collection: @opponents, as: :opponents %>
 
+<% if @last_fight_results %>
+  <%= render partial: "results" %>
+<% end %>
+
 
 
 
@@ -34,4 +38,6 @@
     document.getElementById('edit-form').style.display = 'block';
     this.style.display = 'none';
   });
+
+  $('#result-modal').modal('show')
 </script>
