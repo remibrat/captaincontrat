@@ -2,5 +2,5 @@
 <% if @character.image.attached? %>
     <%= image_tag @character.image, style: "width: 200px; display: block;" %>
 <% end %>
-<p>Vie <strong><%= @character.lp %></strong></p>
-<p>Attaque <strong><%= @character.attack %></strong></p>
+<p>Vie <strong><%= @character.true_lp %></strong></p>
+<p>Attaque <strong><%= @character.true_attack %></strong></p>

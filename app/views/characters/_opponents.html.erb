@@ -6,8 +6,9 @@
             <% end %>
             <div class="card-body">
                 <h5 class="card-title"><%= opponent.name %></h5>
-                <p class="card-text"><strong>Vie </strong><%= opponent.lp %></p>
-                <p class="card-text"><strong>Attaque </strong><%= opponent.attack %></p>
+                <p class="card-text"><strong>Vie </strong><%= opponent.true_lp %></p>
+                <p class="card-text"><strong>Attaque </strong><%= opponent.true_attack %></p>
+                <p class="card-text"><strong>Défense </strong><%= opponent.defense %></p>
                 <% if opponent.equipped_weapon.present? %>
                     <p class="card-text"><%= opponent.equipped_weapon.name %> (<%= opponent.equipped_weapon.attack %> Atk)</p>
                 <% else %>

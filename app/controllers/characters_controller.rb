@@ -13,10 +13,16 @@ class CharactersController < ApplicationController
   end
 
   def create
+    # if params[:character][:image].present?
+    #   image = MiniMagick::Image.open(params[:character][:image].tempfile)
+    #   image.resize '200x200'
+    #   image.write params[:character][:image].tempfile
+    # end
+
     @character = Character.new(character_params)
 
     if @character.save
-      redirect_to @characters
+      redirect_to characters_path
     else
       render :new
     end
@@ -58,7 +64,7 @@ class CharactersController < ApplicationController
   private
 
   def character_params
-    params.require(:character).permit(:name, :equipped_weapon, :equipped_shield, :image)
+    params.require(:character).permit(:name, :lp, :attack, :defense, :equipped_weapon, :equipped_shield, :image)
   end
 
   def equip_weapon(character, weapon)

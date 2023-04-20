@@ -84,20 +84,20 @@ class FightsController < ApplicationController
     def calculate_results(character, opponent)
       results = {}
 
-      if (opponent.lp / character.attack.to_f).ceil <= (character.lp / opponent.attack.to_f).ceil
+      if (opponent.true_lp / (character.true_attack - (character.true_attack * (opponent.defense.to_f / 100))).to_f).ceil <= (character.true_lp / (opponent.true_attack - (opponent.true_attack * (opponent.defense.to_f / 100))).to_f).ceil
         results['winner'] = character
         results['looser'] = opponent
-        results['character_hits'] = (opponent.lp / character.attack.to_f).ceil
+        results['character_hits'] = (opponent.true_lp / (character.true_attack - (character.true_attack * (opponent.defense.to_f / 100))).to_f).ceil
         results['opponent_hits'] = results['character_hits']
       else
         results['winner'] = opponent
         results['looser'] = character
-        results['opponent_hits'] = (character.lp / opponent.attack.to_f).ceil
+        results['opponent_hits'] = (character.true_lp / (opponent.true_attack - (opponent.true_attack * (opponent.defense.to_f / 100))).to_f).ceil
         results['character_hits'] = results['opponent_hits']
       end
 
-      results['character_damages_given'] = results['character_hits'] * character.attack
-      results['opponent_damages_given'] = results['opponent_hits'] * opponent.attack
+      results['character_damages_given'] = results['character_hits'] * (character.true_attack - (character.true_attack * (opponent.defense.to_f / 100)).to_f).ceil
+      results['opponent_damages_given'] = results['opponent_hits'] * (opponent.true_attack - (opponent.true_attack * (opponent.defense.to_f / 100)).to_f).ceil
 
       results
     end

@@ -7,19 +7,21 @@ class Character < ApplicationRecord
 
     has_one_attached :image, :dependent => :destroy
 
+    MAX_STATS_TRESHOLD = 50
 
-    MAX_LP_TRESHOLD = 50
-    MAX_ATK_TRESHOLD = 20
+    attribute :lp, :integer, default: 100
+    attribute :attack, :integer, default: 20
+    attribute :defense, :integer, default: 10
 
     def fights
         characters.or(opponents)
     end
 
-    def lp
+    def true_lp
         self[:lp] + character_items.joins(:item).sum("items.lp")
     end
 
-    def attack
+    def true_attack
         self[:attack] + character_items.joins(:item).sum("items.attack")
     end
 
@@ -33,7 +35,7 @@ class Character < ApplicationRecord
 
     def get_opponents
         Character.where.not(id: id).select do |opponent|
-            ((opponent.lp - lp).abs <= Character::MAX_LP_TRESHOLD &&  (opponent.attack - attack).abs <= Character::MAX_ATK_TRESHOLD)
+            ((true_lp + true_attack + defense) - (opponent.true_lp + opponent.true_attack + opponent.defense)).abs <= MAX_STATS_TRESHOLD
         end
     end
 end

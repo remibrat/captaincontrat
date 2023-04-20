@@ -6,8 +6,9 @@
             <% end %>
             <div class="card-body">
                 <h5 class="card-title"><%= @character.name %></h5>
-                <p class="card-text"><strong>Vie </strong><%= @character.lp %></p>
-                <p class="card-text"><strong>Attaque </strong><%= @character.attack %></p>
+                <p class="card-text"><strong>Vie </strong><%= @character.true_lp %></p>
+                <p class="card-text"><strong>Attaque </strong><%= @character.true_attack %></p>
+                <p class="card-text"><strong>Defense </strong><%= @character.defense %></p>
                 <% if @character.equipped_weapon.present? %>
                     <p class="card-text"><%= @character.equipped_weapon.name %> (<%= @character.equipped_weapon.attack %> Atk)</p>
                 <% else %>
@@ -33,8 +34,9 @@
             <% end %>
             <div class="card-body">
                 <h5 class="card-title"><%= @opponent.name %></h5>
-                <p class="card-text"><strong>Vie </strong><%= @opponent.lp %></p>
-                <p class="card-text"><strong>Attaque </strong><%= @opponent.attack %></p>
+                <p class="card-text"><strong>Vie </strong><%= @opponent.true_lp %></p>
+                <p class="card-text"><strong>Attaque </strong><%= @opponent.true_attack %></p>
+                <p class="card-text"><strong>Defense </strong><%= @opponent.defense %></p>
                 <% if @opponent.equipped_weapon.present? %>
                     <p class="card-text"><%= @opponent.equipped_weapon.name %> (<%= @opponent.equipped_weapon.attack %> Atk)</p>
                 <% else %>

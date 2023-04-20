@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(version: 2023_04_20_121928) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
-    t.integer "lp", default: 60
-    t.integer "attack", default: 6
+    t.integer "lp", default: 100
+    t.integer "attack", default: 20
+    t.integer "defense", default: 10
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

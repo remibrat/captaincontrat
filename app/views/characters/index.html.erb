@@ -13,8 +13,9 @@
                 <% end %>
                 <div class="card-body">
                     <h5 class="card-title"><%= c.name %></h5>
-                    <p class="card-text"><strong>Vie </strong><%= c.lp %></p>
-                    <p class="card-text"><strong>Attaque </strong><%= c.attack %></p>
+                    <p class="card-text"><strong>Vie </strong><%= c.true_lp %></p>
+                    <p class="card-text"><strong>Attaque </strong><%= c.true_attack %></p>
+                    <p class="card-text"><strong>Defense </strong><%= c.defense %></p>
                     <% if c.equipped_weapon.present? %>
                         <p class="card-text"><%= c.equipped_weapon.name %> (<%= c.equipped_weapon.attack %> Atk)</p>
                     <% else %>
