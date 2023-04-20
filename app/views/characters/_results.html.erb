@@ -3,25 +3,29 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4>
-                    <% if @last_fight_results['winner'] == @character %>
-                        Tu as gagné !
-                    <% else %>
-                        Perdu looser
-                    <% end %>
+                    Victoire de <%= @last_fight_results['winner']['name'] %> !
                 </h4>
             </div>
             <div class="modal-body">
                 <div class="container"> 
                         <div class="row"> 
                             <div class="col-md-12"> 
-                                <div class="alert-message %>-message">
-                                    <p><strong>Coups portés : </strong><%= @last_fight_results['character_hits'] %></p>
-                                    <p><strong>Coups reçus : </strong><%= @last_fight_results['opponent_hits'] %></p>
-                                    <p><strong>Dégats infligés : </strong><%= @last_fight_results['character_damages_given'] %></p>
-                                    <p><strong>Dégats reçus : </strong><%= @last_fight_results['opponent_damages_given'] %></p>
-                                    <p><strong>Points de vie restants
-                                    <%= @last_fight_results['winner'] == @character ? '' : 'de l\'adversaire ' %>
-                                    : </strong><%= @last_fight_results['lp_left'] %></p>
+                                <div class="flex justify-content-evenly">
+                                    <div>
+                                        <h5 class="green"><%= @last_fight_results['winner']['name'] %></h5>
+                                        <p><strong>Coups portés : </strong><%= @last_fight_results['character_hits'] %></p>
+                                        <p><strong>Coups reçus : </strong><%= @last_fight_results['opponent_hits'] %></p>
+                                        <p><strong>Dégats infligés : </strong><%= @last_fight_results['character_damages_given'] %></p>
+                                        <p><strong>Dégats reçus : </strong><%= @last_fight_results['opponent_damages_given'] %></p>
+                                    </div>
+
+                                    <div>
+                                        <h5 class="red"><%= @last_fight_results['looser']['name'] %></h5>
+                                        <p><strong>Coups portés : </strong><%= @last_fight_results['opponent_hits'] %></p>
+                                        <p><strong>Coups reçus : </strong><%= @last_fight_results['character_hits'] %></p>
+                                        <p><strong>Dégats infligés : </strong><%= @last_fight_results['opponent_damages_given'] %></p>
+                                        <p><strong>Dégats reçus : </strong><%= @last_fight_results['character_damages_given'] %></p>
+                                    </div>
                                     <i class="icofont icofont-close"></i>
                                 </div>
                             </div>

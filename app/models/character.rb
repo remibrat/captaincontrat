@@ -28,4 +28,10 @@ class Character < ApplicationRecord
     def equipped_shield
         character_items.joins(:item).find_by(items: { slot: Item::SLOTS[:shield] })&.item
     end
+
+    def get_opponents
+        Character.where.not(id: id).select do |opponent|
+            ((opponent.lp - lp).abs <= Character::MAX_LP_TRESHOLD &&  (opponent.attack - attack).abs <= Character::MAX_ATK_TRESHOLD)
+        end
+    end
 end

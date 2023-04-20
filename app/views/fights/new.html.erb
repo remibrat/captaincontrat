@@ -1,0 +1,47 @@
+<div class="grid align-center h-100">
+    <div class="flex justify-content-around align-center">
+        <div class="card" style="width: 15rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><%= @character.name %></h5>
+                <p class="card-text"><strong>Vie </strong><%= @character.lp %></p>
+                <p class="card-text"><strong>Attaque </strong><%= @character.attack %></p>
+                <% if @character.equipped_weapon.present? %>
+                    <p class="card-text"><%= @character.equipped_weapon.name %> (<%= @character.equipped_weapon.attack %> Atk)</p>
+                <% else %>
+                    <p class="card-text">Pas d'arme</p>
+                <% end %>
+                <% if @character.equipped_shield.present? %>
+                    <p class="card-text"><%= @character.equipped_shield.name %> (<%= @character.equipped_shield.lp %> LP)</p>
+                <% else %>
+                    <p class="card-text">Pas de bouclier</p>
+                <% end %>
+            </div>
+        </div>
+
+        <%= form_for(@fight , remote: true) do |f| %>
+            <%= f.hidden_field :character_id, value: @character.id %>
+            <%= f.hidden_field :opponent_id, value: @opponent.id %>
+            <%= f.submit "Combattre" %>
+        <% end %>
+
+        <div class="card" style="width: 15rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><%= @opponent.name %></h5>
+                <p class="card-text"><strong>Vie </strong><%= @opponent.lp %></p>
+                <p class="card-text"><strong>Attaque </strong><%= @opponent.attack %></p>
+                <% if @opponent.equipped_weapon.present? %>
+                    <p class="card-text"><%= @opponent.equipped_weapon.name %> (<%= @opponent.equipped_weapon.attack %> Atk)</p>
+                <% else %>
+                    <p class="card-text">Pas d'arme</p>
+                <% end %>
+                <% if @opponent.equipped_shield.present? %>
+                    <p class="card-text"><%= @opponent.equipped_shield.name %> (<%= @opponent.equipped_shield.lp %> LP)</p>
+                <% else %>
+                    <p class="card-text">Pas de bouclier</p>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

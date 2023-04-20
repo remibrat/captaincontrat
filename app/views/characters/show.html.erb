@@ -1,37 +1,3 @@
 <h2><%= @character.name %></h2>
 <p>Vie <strong><%= @character.lp %></strong></p>
 <p>Attaque <strong><%= @character.attack %></strong></p>
-
-<%= button_to 'Mettre fin à ses jours', @character, method: :delete, data: { confirm: 'Vraiment ?' }, class: 'btn btn-danger' %>
-
-<%= link_to 'Modifier mon Barbare', '#', class: 'btn btn-primary', data: { toggle: 'modal', target: '#edit-modal' } %>
-
-<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      </div>
-      <div class="modal-body">
-        <%= render partial: "edit" %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<%= render "opponents", collection: @opponents, as: :opponents %>
-
-<% if @last_fight_results %>
-  <%= render partial: "results" %>
-<% end %>
-
-
-
-
-
-
-
-
-<script>
-  $('#result-modal').modal('show')
-</script>

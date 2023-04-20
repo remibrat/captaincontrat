@@ -1,17 +1,17 @@
 <div id="edit-form">
-    <%= form_for @character do |f| %>
+    <%= form_for character do |f| %>
         <div class="form-group">
             <%= f.label :name %>
             <%= f.text_field :name, class: 'form-control' %>
         </div>
         <div class="form-group">
             <%= f.label :equipped_weapon %>
-            <%= f.select :equipped_weapon, options_for_select(@items.weapons.map { |item| ["#{item.name} (Attack: #{item.attack})", item.id] }, selected: @character.equipped_weapon.try(:id)), { include_blank: "Pas d'arme" }, { class: 'form-control' } %>
+            <%= f.select :equipped_weapon, options_for_select(@items.weapons.map { |item| ["#{item.name} (Attack: #{item.attack})", item.id] }, selected: character.equipped_weapon.try(:id)), { include_blank: "Pas d'arme" }, { class: 'form-control' } %>
         </div>
 
         <div class="form-group">
             <%= f.label :equipped_shield %>
-            <%= f.select :equipped_shield, options_for_select(@items.shields.map { |item| ["#{item.name} (LP: #{item.lp})", item.id] }, selected: @character.equipped_shield.try(:id)), { include_blank: "Pas de bouclier" }, { class: 'form-control' } %>
+            <%= f.select :equipped_shield, options_for_select(@items.shields.map { |item| ["#{item.name} (LP: #{item.lp})", item.id] }, selected: character.equipped_shield.try(:id)), { include_blank: "Pas de bouclier" }, { class: 'form-control' } %>
         </div>
 
         <%= f.submit 'Confirmer', class: 'btn btn-primary' %>

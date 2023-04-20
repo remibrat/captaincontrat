@@ -13,6 +13,9 @@ class FightsController < ApplicationController
   # GET /fights/new
   def new
     @fight = Fight.new
+
+    @character = Character.find(params[:character_id])
+    @opponent = Character.find(params[:opponent_id])
   end
 
   # GET /fights/1/edit
@@ -36,7 +39,7 @@ class FightsController < ApplicationController
 
     respond_to do |format|
       if @fight.save
-        format.html { redirect_to character_path(@character.id), notice: "Fight was successfully created." }
+        format.html { redirect_to characters_path, notice: "Fight was successfully created." }
         format.json { render :show, status: :created, location: @fight }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -83,14 +86,14 @@ class FightsController < ApplicationController
 
       if (opponent.lp / character.attack.to_f).ceil <= (character.lp / opponent.attack.to_f).ceil
         results['winner'] = character
+        results['looser'] = opponent
         results['character_hits'] = (opponent.lp / character.attack.to_f).ceil
         results['opponent_hits'] = results['character_hits']
-        results['lp_left'] = character.lp - (results['opponent_hits'] * opponent.attack)
       else
         results['winner'] = opponent
+        results['looser'] = character
         results['opponent_hits'] = (character.lp / opponent.attack.to_f).ceil
         results['character_hits'] = results['opponent_hits']
-        results['lp_left'] = opponent.lp - (results['character_hits'] * character.attack)
       end
 
       results['character_damages_given'] = results['character_hits'] * character.attack

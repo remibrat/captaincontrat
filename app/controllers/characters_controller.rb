@@ -1,6 +1,10 @@
 class CharactersController < ApplicationController
   def index
     @characters = Character.all
+    @items = Item.all
+
+    @last_fight_results = session[:last_fight_results] if session[:last_fight_results]
+    session.delete(:last_fight_results)
   end
 
   def new
@@ -18,14 +22,7 @@ class CharactersController < ApplicationController
   end
 
   def show
-    @last_fight_results = session[:last_fight_results] if session[:last_fight_results]
-    session.delete(:last_fight_results)
     @character = Character.find(params[:id])
-    @items = Item.all
-    @opponents = Character.where.not(id: @character.id)
-    @opponents = @opponents.select do |opponent|
-      ((opponent.lp - @character.lp).abs <= Character::MAX_LP_TRESHOLD &&  (opponent.attack - @character.attack).abs <= Character::MAX_ATK_TRESHOLD)
-    end
   end
 
   def edit
@@ -44,7 +41,7 @@ class CharactersController < ApplicationController
     end
 
     if @character.update(character_params.except(:equipped_weapon, :equipped_shield))
-      redirect_to @character
+      redirect_to characters_path
     else
       render :edit
     end
@@ -54,7 +51,7 @@ class CharactersController < ApplicationController
     @character = Character.find(params[:id])
     @character.destroy
 
-    render :new
+    redirect_to characters_path
   end
 
   private

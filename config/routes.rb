@@ -2,7 +2,7 @@
 Rails.application.routes.draw do
   resources :items
   # TODO: constraints: si l'utilisateur n'a pas de personnage
-  root to: redirect { Character.count > 0 ? '/characters/1' : '/characters/new' }
+  root to: 'characters#index'
 
   resources :characters
   resources :fights
