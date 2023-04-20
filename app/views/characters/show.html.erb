@@ -4,21 +4,20 @@
 
 <%= button_to 'Mettre fin à ses jours', @character, method: :delete, data: { confirm: 'Vraiment ?' }, class: 'btn btn-danger' %>
 
-<div id="edit-form" style="display: none;">
-  <%= form_for @character do |f| %>
-    <div class="form-group">
-      <%
-=begin%>
- <%= f.label :name %> 
-<%
-=end%>
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-    <%= f.submit 'Confirmer mon nouveau nom', class: 'btn btn-primary' %>
-  <% end %>
-</div>
+<%= link_to 'Modifier mon Barbare', '#', class: 'btn btn-primary', data: { toggle: 'modal', target: '#edit-modal' } %>
 
-<button id="edit-button" class="btn btn-secondary">Changer de nom</button>
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <%= render partial: "edit" %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= render "opponents", collection: @opponents, as: :opponents %>
 
@@ -34,10 +33,5 @@
 
 
 <script>
-  document.getElementById('edit-button').addEventListener('click', function() {
-    document.getElementById('edit-form').style.display = 'block';
-    this.style.display = 'none';
-  });
-
   $('#result-modal').modal('show')
 </script>

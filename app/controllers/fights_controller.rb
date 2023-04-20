@@ -81,14 +81,14 @@ class FightsController < ApplicationController
     def calculate_results(character, opponent)
       results = {}
 
-      if opponent.lp / character.attack.to_f <= character.lp / opponent.attack.to_f
+      if (opponent.lp / character.attack.to_f).ceil <= (character.lp / opponent.attack.to_f).ceil
         results['winner'] = character
-        results['character_hits'] = (opponent.lp / character.attack).ceil
+        results['character_hits'] = (opponent.lp / character.attack.to_f).ceil
         results['opponent_hits'] = results['character_hits']
         results['lp_left'] = character.lp - (results['opponent_hits'] * opponent.attack)
       else
         results['winner'] = opponent
-        results['opponent_hits'] = (character.lp / opponent.attack).ceil
+        results['opponent_hits'] = (character.lp / opponent.attack.to_f).ceil
         results['character_hits'] = results['opponent_hits']
         results['lp_left'] = opponent.lp - (results['character_hits'] * character.attack)
       end
