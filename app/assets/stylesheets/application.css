@@ -21,6 +21,16 @@
 html, body {
     height: 100%;
 }
+body {
+    background-image: url("background.jpg");
+    background-attachment: fixed;
+}
+.navbar {
+    height: 140px;
+    background-image: url("navbar.png");
+    background-repeat: no-repeat;
+    opacity: 0.9;
+}
 .flex {
     display: flex;
 }
@@ -30,14 +40,23 @@ html, body {
 .justify-content-around {
     justify-content: space-around;
 }
+.justify-content-center {
+    justify-content: center;
+}
 .flex-column {
     flex-direction: column;
+}
+.flex-wrap {
+    flex-wrap: wrap;
 }
 .green {
     color: green;
 }
 .red {
     color: red;
+}
+.white {
+    color: white;
 }
 .h-100 {
     height: 100%;
@@ -47,4 +66,37 @@ html, body {
 }
 .align-center {
     align-items: center;
+}
+.text-end {
+    text-align: end;
+}
+.margin-1 {
+    margin: 1rem;
+}
+.p-top-140 {
+    padding-top: 140px;
+}
+.btn-fight {
+    background-color: #f6a990;
+    color: white;
+}
+.nav-btn {
+    position: absolute;
+    right: 4rem;
+    color: white !important;
+    font-size: xx-large;
+    background-color: unset !important;
+}
+.intro-text {
+    color: white;
+    font-size: initial;
+    text-align: center;
+}
+.create-character {
+    text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+}
+.webkit-center {
+    text-align: -webkit-center;
 }

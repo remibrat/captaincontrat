@@ -1,0 +1,12 @@
+<% @fights.each do |fight| %>
+    <div class="card margin-1">
+        <div class="card-body flex justify-content-evenly align-center">
+            <span class="<%= fight.character == fight.winner ? 'green' : 'red' %>"><%= fight.character.name %></span>
+            <span><strong>VS</strong></span>
+            <span class="<%= fight.opponent == fight.winner ? 'green' : 'red' %>"><%= fight.opponent.name %></span>
+        </div>
+        <div class="card-footer text-muted text-end">
+            <span><%= time_ago_in_words(fight.created_at) %> ago</span>
+        </div>
+    </div>
+<% end %>

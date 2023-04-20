@@ -2,6 +2,7 @@ class CharactersController < ApplicationController
   def index
     @characters = Character.all
     @items = Item.all
+    @fights = Fight.all.order(created_at: :desc).limit(10)
 
     @last_fight_results = session[:last_fight_results] if session[:last_fight_results]
     session.delete(:last_fight_results)
@@ -15,7 +16,7 @@ class CharactersController < ApplicationController
     @character = Character.new(character_params)
 
     if @character.save
-      redirect_to @character
+      redirect_to @characters
     else
       render :new
     end
@@ -57,7 +58,7 @@ class CharactersController < ApplicationController
   private
 
   def character_params
-    params.require(:character).permit(:name, :equipped_weapon, :equipped_shield)
+    params.require(:character).permit(:name, :equipped_weapon, :equipped_shield, :image)
   end
 
   def equip_weapon(character, weapon)

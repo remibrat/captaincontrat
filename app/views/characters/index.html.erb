@@ -1,60 +1,70 @@
-<div class="flex justify-content-evenly">
-    <% @characters.each do |c| %>
-        <div class="card" style="width: 15rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"><%= c.name %></h5>
-                <p class="card-text"><strong>Vie </strong><%= c.lp %></p>
-                <p class="card-text"><strong>Attaque </strong><%= c.attack %></p>
-                <% if c.equipped_weapon.present? %>
-                    <p class="card-text"><%= c.equipped_weapon.name %> (<%= c.equipped_weapon.attack %> Atk)</p>
-                <% else %>
-                    <p class="card-text">Pas d'arme</p>
-                <% end %>
-                <% if c.equipped_shield.present? %>
-                    <p class="card-text"><%= c.equipped_shield.name %> (<%= c.equipped_shield.lp %> LP)</p>
-                <% else %>
-                    <p class="card-text">Pas de bouclier</p>
-                <% end %>
-                <div class="flex flex-column">
-                    <%= link_to 'Faire combattre', '#', class: 'btn btn-primary btn-sm', data: { toggle: 'modal', target: '#opponents-character-' + c.id.to_s + '-modal' } %>
-                    <br>
-                    <div class="flex justify-content-evenly">
-                        <%= link_to 'Modifier', '#', class: 'btn btn-outline-primary btn-sm', data: { toggle: 'modal', target: '#edit-character-' + c.id.to_s + '-modal' } %>
-                        <%= button_to 'Sacrifier', c, method: :delete, data: { confirm: 'Vraiment ?' }, class: 'btn btn-outline-danger btn-sm' %>
-                    </div>
-                </div>
+<div>
+    <h3 class="intro-text">Bienvenue dans l'arène LeBarbare ! Choisis un Barbare existant ou crées-en un nouveau et affrontes ton adversaire.</h3>
 
-                <div class="modal fade" id="opponents-character-<%= c.id %>-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Adversaires</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <%= render partial: "opponents", locals: { character: c } %>
-                        </div>
+    <div class="create-character">
+        <%= link_to 'Créer un Barbare', new_character_path, class: 'btn btn-sm btn-fight' %>
+    </div>
+
+    <div class="flex justify-content-evenly flex-wrap">
+        <% @characters.each do |c| %>
+            <div class="card margin-1" style="width: 15rem;">
+                <% if c.image.attached? %>
+                    <%= image_tag c.image, style: "width: 200px; display: block; align-self:center;" %>
+                <% end %>
+                <div class="card-body">
+                    <h5 class="card-title"><%= c.name %></h5>
+                    <p class="card-text"><strong>Vie </strong><%= c.lp %></p>
+                    <p class="card-text"><strong>Attaque </strong><%= c.attack %></p>
+                    <% if c.equipped_weapon.present? %>
+                        <p class="card-text"><%= c.equipped_weapon.name %> (<%= c.equipped_weapon.attack %> Atk)</p>
+                    <% else %>
+                        <p class="card-text">Pas d'arme</p>
+                    <% end %>
+                    <% if c.equipped_shield.present? %>
+                        <p class="card-text"><%= c.equipped_shield.name %> (<%= c.equipped_shield.lp %> LP)</p>
+                    <% else %>
+                        <p class="card-text">Pas de bouclier</p>
+                    <% end %>
+                    <div class="flex flex-column">
+                        <%= link_to 'Faire combattre', '#', class: 'btn btn-sm btn-fight', data: { toggle: 'modal', target: '#opponents-character-' + c.id.to_s + '-modal' } %>
+                        <br>
+                        <div class="flex justify-content-evenly">
+                            <%= link_to 'Modifier', '#', class: 'btn btn-outline-primary btn-sm', data: { toggle: 'modal', target: '#edit-character-' + c.id.to_s + '-modal' } %>
+                            <%= button_to 'Sacrifier', c, method: :delete, data: { confirm: 'Vraiment ?' }, class: 'btn btn-outline-danger btn-sm' %>
                         </div>
                     </div>
-                </div>
 
-                <div class="modal fade" id="edit-character-<%= c.id %>-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Modifier</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <div class="modal fade" id="opponents-character-<%= c.id %>-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Adversaires</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <%= render partial: "opponents", locals: { character: c } %>
+                            </div>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <%= render partial: "edit", locals: { character: c } %>
-                        </div>
+                    </div>
+
+                    <div class="modal fade" id="edit-character-<%= c.id %>-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modifier</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <%= render partial: "edit", locals: { character: c } %>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <% end %>
+        <% end %>
+    </div>
 </div>
 
 <% if @last_fight_results %>

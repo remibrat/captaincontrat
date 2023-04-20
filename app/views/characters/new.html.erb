@@ -1,12 +1,36 @@
-<h2>Crée ton Barbare !</h2>
+<div class="webkit-center">
+  <div class="card" style="width: 30rem;">
+    <div class="card-body">
+      <h5 class="card-title">Crée ton Barbare !</h5>
+      <%= form_for @character do |f| %>
+        <div class="form-group">  
+          <% if @character.image.attached? %>
+            <%= image_tag @character.image, style: "width: 200px; display: block;" %>
+          <% end %>
 
-<%= form_for @character do |f| %>
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+          <%= f.label :image %>
+          <%= f.file_field :image, class: "form-control" %>
+        </div>
 
-  <div class="actions">
-    <%= f.submit %>
+        <div class="field">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :lp %>
+          <%= f.text_field :lp, class: "form-control" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :attack %>
+          <%= f.text_field :attack, class: "form-control" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Créer", class: "btn btn-fight" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

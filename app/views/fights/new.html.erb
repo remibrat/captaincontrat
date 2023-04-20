@@ -1,7 +1,9 @@
 <div class="grid align-center h-100">
     <div class="flex justify-content-around align-center">
         <div class="card" style="width: 15rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+            <% if @character.image.attached? %>
+                <%= image_tag @character.image, style: "width: 200px; display: block; align-self:center;" %>
+            <% end %>
             <div class="card-body">
                 <h5 class="card-title"><%= @character.name %></h5>
                 <p class="card-text"><strong>Vie </strong><%= @character.lp %></p>
@@ -22,11 +24,13 @@
         <%= form_for(@fight , remote: true) do |f| %>
             <%= f.hidden_field :character_id, value: @character.id %>
             <%= f.hidden_field :opponent_id, value: @opponent.id %>
-            <%= f.submit "Combattre" %>
+            <%= f.submit "Combattre", class: "btn btn-fight" %>
         <% end %>
 
         <div class="card" style="width: 15rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+            <% if @opponent.image.attached? %>
+                <%= image_tag @opponent.image, style: "width: 200px; display: block; align-self:center;" %>
+            <% end %>
             <div class="card-body">
                 <h5 class="card-title"><%= @opponent.name %></h5>
                 <p class="card-text"><strong>Vie </strong><%= @opponent.lp %></p>

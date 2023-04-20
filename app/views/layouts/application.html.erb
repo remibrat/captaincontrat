@@ -12,10 +12,32 @@
   </head>
 
   <body>
-    <nav class="navbar fixed-top navbar-light bg-light">
-      LeBarbare
+    <nav class="navbar fixed-top flex justify-content-center">
+      <%= image_tag("logo.png", class: "img-responsive", id: "navbar-logo") %>
+
+      <% if @fights %>
+        <%= link_to raw('<i class="bi bi-clock-history"></i>'), '#', class: 'nav-btn', data: { toggle: 'modal', target: '#history-modal' } %>
+      <% end %>
     </nav>
+
+    <% if @fights %>
+      <div class="modal fade" id="history-modal" tabindex="-1" role="dialog" aria-labelledby="history-modal" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">10 derniers combats</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <%= render partial: "fights/fight_history" %>
+              </div>
+              </div>
+          </div>
+      </div>
+    <% end %>
     
-    <%= yield %>
+    <div class="p-top-140">
+      <%= yield %>
+    </div>
   </body>
 </html>

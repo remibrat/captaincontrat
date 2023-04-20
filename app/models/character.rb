@@ -5,6 +5,8 @@ class Character < ApplicationRecord
     has_many :character_items
     has_many :items, through: :character_items
 
+    has_one_attached :image, :dependent => :destroy
+
 
     MAX_LP_TRESHOLD = 50
     MAX_ATK_TRESHOLD = 20

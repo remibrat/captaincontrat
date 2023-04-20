@@ -1,7 +1,9 @@
-<div class="flex justify-content-evenly">
+<div class="flex justify-content-evenly flex-wrap">
     <% character.get_opponents.each do |opponent| %>
-        <div class="card" style="width: 15rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card margin-1" style="width: 13rem;">
+            <% if opponent.image.attached? %>
+                <%= image_tag opponent.image, style: "width: 200px; display: block; align-self:center;" %>
+            <% end %>
             <div class="card-body">
                 <h5 class="card-title"><%= opponent.name %></h5>
                 <p class="card-text"><strong>Vie </strong><%= opponent.lp %></p>
@@ -19,7 +21,7 @@
                 <%= form_tag(new_fight_path, method: :get) do %>
                     <%= hidden_field_tag :character_id, character.id %>
                     <%= hidden_field_tag :opponent_id, opponent.id %>
-                    <%= submit_tag "Taper" %>
+                    <%= submit_tag "Taper", class: "btn btn-fight" %>
                 <% end %>
             </div>
         </div>
