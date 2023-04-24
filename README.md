@@ -1,14 +1,10 @@
-Ce repo contient le squelette d'une application à compléter dans le cadre du processus de recrutement des développeurs.
+# A améliorer
 
-Plus d'infos à propos du poste de développeur chez Captain Contrat sur [notre page jobs](https://jobs.captaincontrat.com/)
-
-# Captain Challenge
-
-Bienvenue jeune moussaillon !
-
-Pour intégrer le navire Captain Contrat, tu dois créer une arène où deux héros pourront s'affronter !
-
-Pour ce faire, nous avons mis à ta disposition une appli vide qu'il te faudra compléter.
+- duplication de code dans les vues (en particulier fights/new.html), utiliser plus de partial aurait été préférable
+- n+1 sur l'index des characters (se documenter sur les n+1 et includes)
+- logique de combat dans le controller (se renseigner sur les services par exemple), et qui possède du code dupliqué et une condition très longue qui aurait mérité être extraite dans une méthode bien nommée
+- les form de création et edition de character sont proches, on aurait aimé un peu de code en commun
+- Enfin, l'utilisation de weapon_item est discutable, vu qu'on n'a au final qu'un item de chaque type et vu l'existance et l'utilisation des méthodes unequip et de la character#equipped_weapon et character#equipped_shield, on aurait aussi vite fait d'avoir deux relations directe entre character et item (mais moins important que les points précédents).
 
 ## Résultat attendu
 
